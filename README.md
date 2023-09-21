@@ -1,5 +1,5 @@
 # APEF WEB
-Sistema WEB para agendamento de procedimentos estéticos faciais
+Sistema WEB para agendamento de procedimentos estéticos faciais.
 
 O sistema surgil da necessidade de uma clinica de estática facial, poder
 realizar o controle e os agendamentos dos procedimento de uma forma simples e
