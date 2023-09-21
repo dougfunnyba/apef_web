@@ -12,7 +12,7 @@
         cache: false,
         data: $(this).serialize(),
         success: function (){
-            resetInputFields()
+            reset_input_fields_procedure()
             get_aesthetic_procedures();
             alert("Procedimento cadastrado com sucesso!")
         },
@@ -26,7 +26,7 @@
  /**
  * Função para limpar os campos do fomulário
  */
-function resetInputFields(){
+function reset_input_fields_procedure(){
     //Percorre todos os campos do formulário e reseta cada um dos campos
     $("#add-procedure").each(function(){
         this.reset();

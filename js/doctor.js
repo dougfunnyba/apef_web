@@ -12,7 +12,7 @@ $("#add-doctor").submit(function (e) {
         cache: false,
         data: $(this).serialize(),
         success: function (){
-            resetInputFields()
+            reset_input_fields_doctor()
             get_doctors();
             alert("Médico cadastrado com sucesso!")
         },
@@ -26,7 +26,7 @@ $("#add-doctor").submit(function (e) {
  /**
  * Função para limpar os campos do fomulário
  */
-function resetInputFields(){
+function reset_input_fields_doctor(){
     //Percorre todos os campos do formulário e reseta cada um dos campos
     $("#add-doctor").each(function(){
         this.reset();
