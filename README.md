@@ -18,3 +18,7 @@ Containers, Navbar.
 
 * JQuery-UI foi usado o datepicker para melhor usabilidade na escolha da data
 tanto no agendamento quanto na consulta por data.
+
+## Como executar
+
+Para executar o font end bas ta dar um duplo click no aquivo `index.html`
