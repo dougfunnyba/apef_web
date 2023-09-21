@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>APEF WEB</title>
+
+    <!-- Importação dos arquivos css usados no app -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery-ui.theme.css" rel="stylesheet">
+    <link href="css/jquery-ui.structure.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Conteiner para organizar a parra de navegação -->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">APEF WEB</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#" data-bs-toggle="modal" data-bs-target="#schedulingModal">Agendamento</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#" data-bs-toggle="modal" data-bs-target="#doctorModal">Novo médico</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#" data-bs-toggle="modal" data-bs-target="#procedureModal">Novo procedimento</a>
+                      </li>
+                  </ul>
+                  <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="text" id="search_date_scheduling" name="date_scheduling"  
+                    placeholder="Informe uma data" readonly>
+                    <button class="btn btn-light me-1 btn-sm" type="button" id="btn-search-date">Pesquisar</button>
+                    <button class="btn btn-light btn-sm" type="button" id="btn-search-clear">Limpar</button>
+                  </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Container para organizar o carousel de vizualização de banners -->
+    <div class="container">
+        <div id="carouselBanners" class="carousel slide mt-1" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselBanners" data-bs-slide-to="0" 
+              class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselBanners" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselBanners" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="img/banner_1.jpg" class="d-block img-slide" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h1>Procedimentos Estéticos Fáciais.</h1>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/banner_2.png" class="d-block img-slide" alt="..." >
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Procedimentos Estéticos Fáciais.</h1>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/banner_3.jpg" class="d-block img-slide" alt="..." >
+                <div class="carousel-caption d-none d-md-block">
+                    <h1>Procedimentos Estéticos Fáciais.</h1>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselBanners" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselBanners" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    </div>
+
+    <!-- Container para carregar a tabela de agendamentos -->
+    <div class="container mt-4 mb-5">
+        <div class="alert alert-primary pt-0 pb-0" role="alert"><h3>Agendamentos</h3></div>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm table-bordered" id="table-agendamentos">
+            <thead>
+              <tr>
+                <th scope="col">Paciente</th>
+                <th scope="col">Médico</th>
+                <th scope="col">Procedimeto</th>
+                <th scope="col" class="content-center">Data</th>
+                <th scope="col" class="content-center">Hora</th>
+                <th scope="col" class="content-center">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <!-- Modal para realizar um agendamento -->
+    <div class="modal fade" id="schedulingModal" tabindex="-1" aria-labelledby="schedulingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="schedulingModalLabel">Agendar Paciente</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" id="add-scheduling">
+                    <div class="col-md-12">
+                      <label for="patient_name" class="form-label">Nome do Paciente <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="patient_name" name="patient_name" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="aesthetic_procedure_id" class="form-label">Procedimento <span class="text-danger">*</span></label>
+                        <select id="aesthetic_procedure_id" class="form-select" name="aesthetic_procedure_id" required>
+                          <option selected>Selecione...</option>
+                          <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="doctor_id" class="form-label">Médico Esteticista <span class="text-danger">*</span></label>
+                        <select id="doctor_id" class="form-select" name="doctor_id" required>
+                          <option selected>Selecione...</option>
+                          <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="date_scheduling" class="form-label">Agendar para a data: <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="date_scheduling" name="date_scheduling" readonly required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="hour_scheduling" class="form-label">Hora: <span class="text-danger">*</span></label>
+                      <select id="hour_scheduling" class="form-select" name="hour_scheduling" required>
+                        <option selected>Selecione...</option>
+                        <option value="08:00">08:00</option>
+                        <option value="08:30">08:30</option>
+                        <option value="09:00">09:00</option>
+                        <option value="09:30">09:30</option>
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option>
+                        <option value="16:00">16:00</option>
+                        <option value="16:30">16:30</option>
+                        <option value="17:00">17:00</option>
+                        <option value="17:30">17:30</option>
+                      </select>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button class="btn btn-primary" id="btn_agendar">Agendar</button>
+                    </div>
+                  </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Modal para realizar cadastro de médicos -->
+    <div class="modal fade" id="doctorModal" tabindex="-1" aria-labelledby="doctorModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="doctorModalLabel">Cadastrar médico esteticista</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form class="row g-3" id="add-doctor">
+                  <div class="col-md-12">
+                    <label for="name" class="form-label">Nome<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                  </div>
+                  <div class="col-12 text-end">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button class="btn btn-primary" id="btn_cad_doctor">Cadastrar</button>
+                  </div>
+                </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para realizar cadastro de procedimetos -->
+    <div class="modal fade" id="procedureModal" tabindex="-1" aria-labelledby="procedureModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="procedureModalLabel">Cadastrar procedimento</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form class="row g-3" id="add-procedure">
+                  <div class="col-md-12">
+                    <label for="name" class="form-label">Procedimento<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                  </div>
+                  <div class="col-md-12">
+                    <label for="description" class="form-label">Descrição</label>
+                    <input type="text" class="form-control" id="description" name="description">
+                  </div>
+                  <div class="col-12 text-end">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button class="btn btn-primary" id="btn_cad_procedure">Cadastrar</button>
+                  </div>
+                </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Importação dos arquivos js usados no app -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/doctor.js"></script>
+    <script src="js/procedure.js"></script>
+  </body>
+</html>
