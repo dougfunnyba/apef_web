@@ -21,4 +21,4 @@ tanto no agendamento quanto na consulta por data.
 
 ## Como executar
 
-Para executar o font end bas ta dar um duplo click no aquivo `index.html`
+Para executar o font end basta dar um duplo click no aquivo `index.html`
